@@ -25,10 +25,8 @@ screen.create_polygon( x1, y1, x2, y2, x3, y3, outline="white", width=4)
 
 
 #RIGHT HALF       
-for k in range(1000):
+for k in range(100000):
     x = randint(x2, x3)
-    if y1 > y2:
-        y1, y2 = y2, y1
     y = randint(y2, y3)
 
     m1 = (y3 - y2) / (x3 - x2)
@@ -40,8 +38,7 @@ for k in range(1000):
     if y > yLine:
         screen.create_line(x, y, x, yLine, width = 2, fill = choice(colors))
 
-
-
+'''
 #LEFT HALF
 for k in range(1000):
     x = randint(x1, x2)
@@ -62,5 +59,5 @@ for k in range(1000):
     
     if y > yLine:
         screen.create_line(x, y, x, yLine, width = 2, fill = choice(colors))
-
+'''
 screen.mainloop()
