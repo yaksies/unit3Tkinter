@@ -6,22 +6,17 @@ screen = Canvas(Tk(), width=800, height=800, background="black" )
 screen.pack()
 
 colors = ["red", "blue", "green", "pink", "orange", "yellow", "white", "grey", "magenta", "maroon", "lawngreen", "hotpink", "skyblue", "purple", "black", "beige"]
-'''
-def randomrgb():
-    return rgb_to_hex((randint(0, 255), randint(0, 255), randint(0, 255)))
-
-def rgb_to_hex(rgb_color):
-    return '#{:02x}{:02x}{:02x}'.format(*rgb_color)
-'''
 
 x1 = int(input("Enter the x coordinate of the left corner: "))
 
 x2 = int(input("Enter the x coordinate of the middle corner: "))
 while x2 < x1:
+    print("Your x2 value may not be greater than the value of x1. Please try again. ")
     x2 = int(input("Enter the x coordinate of the middle corner: "))
 
 x3 = int(input("Enter the x coordinate of the right corner: "))
 while x3 < x2:
+    print("Your x2 value may not be greater than the value of x1. Please try again. ")
     x3 = int(input("Enter the x coordinate of the right corner: "))
 
 y1 = int(input("Enter the y coordinate of the left corner: "))
@@ -35,8 +30,7 @@ y3 = int(input("Enter the y coordinate of the right corner: "))
 screen.create_polygon( x1, y1, x2, y2, x3, y3, outline="white", width=4)
 
 #RIGHT HALF       
-for _ in range(1000): # number of lines on one side of triangle
-    #sleep(0.01)
+for _ in range(2000):
     x = randint(x2, x3)
     y = randint(y2, y3)
 
@@ -46,16 +40,19 @@ for _ in range(1000): # number of lines on one side of triangle
     #print(m1)
    
     yLine = m*x + b
+    for i in range(2000):
+        xa = randint(x1, x3)
+        ya = randint(min(y1, y3), max(y1, y3))
 
-    if y > yLine:
-        screen.create_line(x, y, x, yLine, width = 2, fill = choice(colors))
-    
-    #screen.update()
+        ma = (y3 - y1) / (x3 - x1)
 
+        yLine1 = m*x + b
+        
+        if ya > yLine1 and y > yLine and x == xa:
+            screen.create_line(x, yLine, xa, ya, width = 2, fill = choice(colors))
 
 #LEFT HALF
-for _ in range(1000): # number of lines on one side of triangle
-    #sleep(0.01)
+for _ in range(2000):
     x = randint(x1, x2)
     y = randint(min(y1, y2), max(y1, y2))
 
@@ -66,10 +63,24 @@ for _ in range(1000): # number of lines on one side of triangle
    
     yLine = m*x + b
 
+    for i in range(2000):
+        xa = randint(x1, x3)
+        ya = randint(min(y1, y3), max(y1, y3))
+
+        ma = (y3 - y1) / (x3 - x1)
+
+        yLine1 = m*x + b
+        
+        if ya > yLine1 and y > yLine and x == xa:
+            screen.create_line(x, yLine, xa, ya, width = 2, fill = choice(colors))
+'''
     if y > yLine:
         screen.create_line(x, y, x, yLine, width = 2, fill = choice(colors))
+'''
 
 #BOTTOM LINE
+
+'''
 for _ in range(1000):
     x = randint(x1, x3)
     y = randint(min(y1, y3), max(y1, y3))
@@ -82,5 +93,5 @@ for _ in range(1000):
     
     if y < yLine:
         screen.create_line(x, y, x, yLine, width = 2, fill = choice(colours))
-
+'''
 screen.mainloop()
