@@ -2,7 +2,7 @@ from tkinter import*
 from random import randint, choice
 from time import sleep
 
-screen = Canvas(Tk(), width=805, height=805, background="black" )
+screen = Canvas(Tk(), width=800, height=800, background="black" )
 screen.pack()
 
 colors = ["red", "blue", "green", "pink", "orange", "yellow", "white", "grey", "magenta", "maroon", "lawngreen", "hotpink", "skyblue", "purple", "black", "beige"]
@@ -40,12 +40,12 @@ for _ in range(1000): # number of lines on one side of triangle
     x = randint(x2, x3)
     y = randint(y2, y3)
 
-    m1 = (y3 - y2) / (x3 - x2)
+    m = (y3 - y2) / (x3 - x2)
 
-    b = y3 - m1*x3
+    b = y3 - m*x3
     #print(m1)
    
-    yLine = m1*x + b
+    yLine = m*x + b
 
     if y > yLine:
         screen.create_line(x, y, x, yLine, width = 2, fill = choice(colors))
@@ -59,15 +59,28 @@ for _ in range(1000): # number of lines on one side of triangle
     x = randint(x1, x2)
     y = randint(min(y1, y2), max(y1, y2))
 
-    m1 = (y1 - y2) / (x1 - x2)
+    m = (y1 - y2) / (x1 - x2)
 
-    b = y1 - m1*x1
+    b = y1 - m*x1
     #print(m1)
    
-    yLine = m1*x + b
+    yLine = m*x + b
 
     if y > yLine:
         screen.create_line(x, y, x, yLine, width = 2, fill = choice(colors))
 
+#BOTTOM LINE
+for _ in range(1000):
+    x = randint(x1, x3)
+    y = randint(min(y1, y3), max(y1, y3))
+
+    m = (y3 - y1) / (x3 - x1)
+
+    b = y1 - m * x
+
+    yLine = m*x + b
+    
+    if y < yLine:
+        screen.create_line(x, y, x, yLine, width = 2, fill = choice(colours))
 
 screen.mainloop()
