@@ -30,9 +30,9 @@ y3 = int(input("Enter the y coordinate of the right corner: "))
 screen.create_polygon( x1, y1, x2, y2, x3, y3, outline="white", width=4)
 
 #RIGHT HALF       
-for _ in range(2000):
+for _ in range(1000):
     x = randint(x2, x3)
-    y = randint(y2, y3)
+    y = randint(min(y2, y3), max(y2, y3))
 
     m = (y3 - y2) / (x3 - x2)
 
@@ -40,19 +40,21 @@ for _ in range(2000):
     #print(m1)
    
     yLine = m*x + b
-    for i in range(2000):
+    for i in range(1000):
         xa = randint(x1, x3)
         ya = randint(min(y1, y3), max(y1, y3))
 
         ma = (y3 - y1) / (x3 - x1)
 
-        yLine1 = m*x + b
+        b = y3 - ma * x3
+
+        yLine1 = ma*xa + b
         
         if ya > yLine1 and y > yLine and x == xa:
-            screen.create_line(x, yLine, xa, ya, width = 2, fill = choice(colors))
+            screen.create_line(x, yLine, xa, yLine1, width = 2, fill = choice(colors))
 
 #LEFT HALF
-for _ in range(2000):
+for _ in range(1000):
     x = randint(x1, x2)
     y = randint(min(y1, y2), max(y1, y2))
 
@@ -63,35 +65,15 @@ for _ in range(2000):
    
     yLine = m*x + b
 
-    for i in range(2000):
+    for i in range(1000):
         xa = randint(x1, x3)
         ya = randint(min(y1, y3), max(y1, y3))
 
         ma = (y3 - y1) / (x3 - x1)
 
-        yLine1 = m*x + b
+        yLine1 = ma*xa + b
         
         if ya > yLine1 and y > yLine and x == xa:
-            screen.create_line(x, yLine, xa, ya, width = 2, fill = choice(colors))
-'''
-    if y > yLine:
-        screen.create_line(x, y, x, yLine, width = 2, fill = choice(colors))
-'''
+            screen.create_line(x, yLine, xa, yLine1, width = 2, fill = choice(colors))
 
-#BOTTOM LINE
-
-'''
-for _ in range(1000):
-    x = randint(x1, x3)
-    y = randint(min(y1, y3), max(y1, y3))
-
-    m = (y3 - y1) / (x3 - x1)
-
-    b = y1 - m * x
-
-    yLine = m*x + b
-    
-    if y < yLine:
-        screen.create_line(x, y, x, yLine, width = 2, fill = choice(colours))
-'''
 screen.mainloop()
